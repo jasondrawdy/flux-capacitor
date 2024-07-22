@@ -10,8 +10,9 @@
 # consistent git streak on the Github platform.
 # #########################################################################
 # Import native Python libraries and functions.
-import sys
-import time
+import os # Only calling os.chdir() in the __init__ function.
+import sys # Exits the program if there are errors commiting.
+import time # Allows the sentinel to cleanup garbage files.
 import json
 from json import JSONDecodeError
 from datetime import datetime, timezone
@@ -71,6 +72,7 @@ class FluxCapacitor():
             
 if __name__ == '__main__':
     try:
+        os.chdir("..") # Make sure we can see the data folder and the history file.
         keep_system_clean()
         flux_capacitor = FluxCapacitor()
         flux_capacitor.commit_repository()

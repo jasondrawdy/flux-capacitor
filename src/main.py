@@ -38,7 +38,7 @@ class CommitDetails():
 
 class FluxCapacitor():
     def __init__(self: "FluxCapacitor") -> None:
-        self._daily_file: str = "./history.json"
+        self._daily_file: str = "./data/history.json"
         self._repository: Repo = Repo(".") # Make sure to use the whole project instead of just "src".
         self._origin: Remote = self._repository.remote('origin')
         self._details: CommitDetails = None
@@ -56,7 +56,7 @@ class FluxCapacitor():
         data = json.loads(contents)
         data['LAST_UPDATE'] = str(datetime.now(tz=timezone.utc))
         data['UPDATE_COUNT'] = int(data['UPDATE_COUNT']) + 1
-        self.details = CommitDetails(data)
+        self._details = CommitDetails(data)
         self._write_file(self._daily_file, json.dumps(data))
 
     def commit_repository(self: "FluxCapacitor"):
@@ -72,7 +72,7 @@ class FluxCapacitor():
             
 if __name__ == '__main__':
     try:
-        #os.chdir("..") # Make sure we can see the data folder and the history file.
+        os.chdir("..") # Make sure we can see the data folder and the history file.
         keep_system_clean()
         flux_capacitor = FluxCapacitor()
         flux_capacitor.commit_repository()

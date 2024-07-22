@@ -39,7 +39,7 @@ class FluxCapacitor():
     def __init__(self: "FluxCapacitor") -> None:
         self._daily_file: str = "../data/history.json"
         self._repository: Repo = Repo("..") # Make sure to use the whole project instead of just "src".
-        self._origin: Remote = self.repository.remote('origin')
+        self._origin: Remote = self._repository.remote('origin')
         self._details: CommitDetails = None
 
     def _read_file(self: "FluxCapacitor", filepath: str):

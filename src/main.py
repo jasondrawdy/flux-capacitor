@@ -39,6 +39,7 @@ class CommitDetails():
 class FluxCapacitor():
     def __init__(self: "FluxCapacitor") -> None:
         self._default_path: str = "."
+        self._daily_file: str = f"{self._default_path}/data/history.json"
         self._repository: Repo = Repo(self._default_path)
         #self._origin: Remote = self._repository.remote('origin')
         #self._details: CommitDetails = None

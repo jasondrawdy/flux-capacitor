@@ -17,7 +17,7 @@ import json
 from json import JSONDecodeError
 from datetime import datetime, timezone
 # Import 3rd party pip package resources.
-from git import Repo, Remote, PushInfo
+from git import Repo, PushInfo
 from git.exc import InvalidGitRepositoryError
 # Import custom packages and modules.
 from logger import Logger
@@ -41,8 +41,6 @@ class FluxCapacitor():
         self._default_path: str = "."
         self._daily_file: str = f"{self._default_path}/data/history.json"
         self._repository: Repo = Repo(self._default_path)
-        #self._origin: Remote = self._repository.remote('origin')
-        #self._details: CommitDetails = None
 
     def _read_file(self: "FluxCapacitor", filepath: str):
         with open(filepath, 'r') as file:
@@ -61,7 +59,6 @@ class FluxCapacitor():
         self._write_file(self._daily_file, json.dumps(data))
 
     def commit_repository(self: "FluxCapacitor"):
-        #self._origin.pull()
         self._update_history()
         self._repository.git.add(update=True)
         self._repository.index.commit(self._details.message)
